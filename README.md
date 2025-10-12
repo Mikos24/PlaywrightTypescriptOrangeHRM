@@ -9,9 +9,9 @@ This project was created for **Safeguard Global** as part of the interview proce
 **Requirement:** Develop a test framework and implement tests for OrangeHRM
 
 **Instructions Completed:**
-1. ✅ **Module Selection:** Tests implemented for the **Recruitment module**
-2. ✅ **Authentication:** Uses login details from the OrangeHRM demo site (Admin/admin123)
-3. ✅ **Technology Stack:** Built with **TypeScript** and Playwright
+1. **Module Selection:** Tests implemented for the **Recruitment module**
+2. **Authentication:** Uses login details from the OrangeHRM demo site (Admin/admin123)
+3. **Technology Stack:** Built with **TypeScript** and Playwright
 
 ## Test Coverage
 
