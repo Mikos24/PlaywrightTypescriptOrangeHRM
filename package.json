@@ -1,0 +1,17 @@
+{
+  "name": "playwright-mcp",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:list": "npx playwright test --list"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.2",
+    "typescript": "^5.9.3"
+  }
+}
