@@ -79,16 +79,4 @@ export class AddCandidatePage extends BasePage {
   async verifyValidationErrors(): Promise<void> {
     await this.errorMessages.first().waitFor({ state: 'visible', timeout: 5000 });
   }
-
-  /**
-   * Verify success message or navigation
-   */
-  async verifySuccess(): Promise<void> {
-    const candidatesTable = this.page.locator('.oxd-table');
-    try {
-      await this.successMessage.waitFor({ state: 'visible', timeout: 3000 });
-    } catch {
-      await candidatesTable.waitFor({ state: 'visible', timeout: 3000 });
-    }
-  }
 }

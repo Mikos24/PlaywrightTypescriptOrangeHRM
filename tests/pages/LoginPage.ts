@@ -6,14 +6,12 @@ export class LoginPage extends BasePage {
   readonly usernameInput: Locator;
   readonly passwordInput: Locator;
   readonly loginButton: Locator;
-  readonly errorMessage: Locator;
 
   constructor(page: Page) {
     super(page);
     this.usernameInput = page.locator('input[name="username"]');
     this.passwordInput = page.locator('input[name="password"]');
     this.loginButton = page.locator('button[type="submit"]');
-    this.errorMessage = page.locator('.oxd-alert--error');
   }
 
   /**
@@ -30,21 +28,5 @@ export class LoginPage extends BasePage {
     await this.fillInput(this.usernameInput, username);
     await this.fillInput(this.passwordInput, password);
     await this.clickElement(this.loginButton);
-  }
-
-  /**
-   * Verify login form is displayed
-   */
-  async verifyLoginForm(): Promise<void> {
-    await this.verifyElementVisible(this.usernameInput);
-    await this.verifyElementVisible(this.passwordInput);
-    await this.verifyElementVisible(this.loginButton);
-  }
-
-  /**
-   * Check if error message is displayed
-   */
-  async hasErrorMessage(): Promise<boolean> {
-    return await this.isElementVisible(this.errorMessage);
   }
 }

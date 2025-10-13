@@ -1,39 +1,29 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from './pages/LoginPage';
-import { RecruitmentPage } from './pages/RecruitmentPage';
+import { BaseTestClass } from './base/BaseTestClass';
 import { VacanciesPage } from './pages/VacanciesPage';
 import { TestData } from './utils/testData';
 
 test.describe('Recruitment - Vacancies Tab - Sanity Tests', () => {
+  let baseTest: BaseTestClass;
+  let vacanciesPage: VacanciesPage;
+
+  test.beforeEach(async ({ page }) => {
+    // Initialize base test and perform login + navigation
+    baseTest = new BaseTestClass(page);
+    await baseTest.loginAndNavigateToVacancies();
+
+    // Initialize page objects
+    vacanciesPage = new VacanciesPage(page);
+  });
   
-  test('TC_VACANCIES_001 - Verify Vacancies Page Load and Basic UI Elements', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login to OrangeHRM
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-
-    // Navigate to Vacancies
-    await recruitmentPage.navigateToVacancies();
-
-    // Verify page load and UI elements
+  test('TC_VACANCIES_001 - Verify Vacancies Page Load and Basic UI Elements', async () => {
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.verifyVacanciesPageLoaded();
     await vacanciesPage.verifyMainUIElements();
   });
 
   test('TC_VACANCIES_002 - Add New Vacancy - Happy Path', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login to OrangeHRM
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-
-    // Navigate to Vacancies and create new vacancy
-    await recruitmentPage.navigateToVacancies();
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.clickAddVacancy();
     
     // Verify navigation to Add Vacancy page
@@ -101,17 +91,8 @@ test.describe('Recruitment - Vacancies Tab - Sanity Tests', () => {
     }
   });
 
-  test('TC_VACANCIES_003 - Vacancy Search and Filter Functionality', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login and navigate to vacancies
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-    await recruitmentPage.navigateToVacancies();
-
-    // Use Job Title filter and search
+  test('TC_VACANCIES_003 - Vacancy Search and Filter Functionality', async () => {
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.selectJobTitle();
     await vacanciesPage.clickElement(vacanciesPage.searchButton);
     await vacanciesPage.verifyElementVisible(vacanciesPage.vacanciesTable);
@@ -121,17 +102,8 @@ test.describe('Recruitment - Vacancies Tab - Sanity Tests', () => {
     await vacanciesPage.verifyElementVisible(vacanciesPage.vacanciesTable);
   });
 
-  test('TC_VACANCIES_004 - Vacancy Status Filter', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login and navigate to vacancies
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-    await recruitmentPage.navigateToVacancies();
-
-    // Use Status filter and search
+  test('TC_VACANCIES_004 - Vacancy Status Filter', async () => {
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.selectStatus();
     await vacanciesPage.clickElement(vacanciesPage.searchButton);
     await vacanciesPage.verifyElementVisible(vacanciesPage.vacanciesTable);
@@ -140,17 +112,8 @@ test.describe('Recruitment - Vacancies Tab - Sanity Tests', () => {
     await vacanciesPage.resetFilters();
   });
 
-  test('TC_VACANCIES_005 - Hiring Manager Filter Functionality', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login and navigate to vacancies
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-    await recruitmentPage.navigateToVacancies();
-
-    // Use Hiring Manager filter and search
+  test('TC_VACANCIES_005 - Hiring Manager Filter Functionality', async () => {
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.selectHiringManager();
     await vacanciesPage.clickElement(vacanciesPage.searchButton);
     await vacanciesPage.verifyElementVisible(vacanciesPage.vacanciesTable);
@@ -160,16 +123,7 @@ test.describe('Recruitment - Vacancies Tab - Sanity Tests', () => {
   });
 
   test('TC_VACANCIES_006 - Add Vacancy Required Field Validation', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const recruitmentPage = new RecruitmentPage(page);
-    const vacanciesPage = new VacanciesPage(page);
-
-    // Login and navigate to vacancies
-    await loginPage.navigateToLogin();
-    await loginPage.login(TestData.LOGIN_CREDENTIALS.username, TestData.LOGIN_CREDENTIALS.password);
-    await recruitmentPage.navigateToVacancies();
-
-    // Click "Add" button to go to Add Vacancy form
+    // Already on vacancies page due to beforeEach
     await vacanciesPage.clickAddVacancy();
     
     // Try to save without filling required fields
