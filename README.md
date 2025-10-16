@@ -6,18 +6,16 @@ This project was created for **Safeguard Global** as part of the interview proce
 
 ## Requirements Fulfilled
 
-**Requirement:** Develop a test framework and implement tests for OrangeHRM
+**Requirement:** Develop a test framework and implement tests for [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com)
 
-**Instructions Completed:**
-1. **Module Selection:** Tests implemented for the **Recruitment module**
+**Instructions:**
+1. **Module Selection:** Tests implemented for the **Recruitment module** with two tabs: **Candidates** and **Vacances**
 2. **Authentication:** Uses login details from the OrangeHRM demo site (Admin/admin123)
-3. **Technology Stack:** Built with **TypeScript** and Playwright
+3. **Technology Selection** Playwright with Typescript
 
 ## Test Coverage
 
-The framework includes comprehensive tests for the OrangeHRM Recruitment module:
-
-### Candidates Tab (6 Tests)
+### The Candidates Tab (6 Tests)
 - Page load and UI element verification
 - Add new candidate functionality (happy path)
 - Candidate search functionality
@@ -25,7 +23,7 @@ The framework includes comprehensive tests for the OrangeHRM Recruitment module:
 - Candidate status filter functionality
 - Required field validation
 
-### Vacancies Tab (6 Tests)
+### The Vacancies Tab (6 Tests)
 - Page load and UI element verification
 - Add new vacancy functionality (happy path) 
 - Vacancy search and filter functionality
