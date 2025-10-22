@@ -1,0 +1,93 @@
+# Azure DevOps Pipeline for Playwright Tests
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - tests/**
+      - playwright.config.ts
+      - package.json
+
+pr:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - tests/**
+      - playwright.config.ts
+      - package.json
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  nodeVersion: '18.x'
+
+stages:
+- stage: Test
+  displayName: 'Run Playwright Tests'
+  jobs:
+  - job: PlaywrightTests
+    displayName: 'Execute Playwright Tests'
+    steps:
+    - task: NodeTool@0
+      displayName: 'Install Node.js'
+      inputs:
+        versionSpec: $(nodeVersion)
+
+    - task: Cache@2
+      displayName: 'Cache node_modules'
+      inputs:
+        key: 'npm | "$(Agent.OS)" | package-lock.json'
+        restoreKeys: |
+          npm | "$(Agent.OS)"
+        path: node_modules
+
+    - script: |
+        npm ci
+      displayName: 'Install dependencies'
+
+    - script: |
+        npx playwright install --with-deps
+      displayName: 'Install Playwright browsers'
+
+    - script: |
+        npx playwright test
+      displayName: 'Run Playwright tests'
+      env:
+        CI: true
+
+    - task: PublishTestResults@2
+      displayName: 'Publish test results'
+      condition: succeededOrFailed()
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: 'test-results/junit-report.xml'
+        testRunTitle: 'Playwright Test Results'
+
+    - task: PublishHtmlReport@1
+      displayName: 'Publish HTML report'
+      condition: succeededOrFailed()
+      inputs:
+        reportDir: 'playwright-report'
+        tabName: 'Playwright Report'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish test artifacts'
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'test-results'
+        artifact: 'test-results'
+        publishLocation: 'pipeline'
+
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish HTML report artifacts'
+      condition: succeededOrFailed()
+      inputs:
+        targetPath: 'playwright-report'
+        artifact: 'playwright-report'
+        publishLocation: 'pipeline'
