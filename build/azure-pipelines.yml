@@ -4,22 +4,12 @@ trigger:
     include:
       - main
       - develop
-  paths:
-    include:
-      - tests/**
-      - playwright.config.ts
-      - package.json
 
 pr:
   branches:
     include:
       - main
       - develop
-  paths:
-    include:
-      - tests/**
-      - playwright.config.ts
-      - package.json
 
 pool:
   vmImage: 'ubuntu-latest'
