@@ -68,26 +68,20 @@ stages:
         testResultsFormat: 'JUnit'
         testResultsFiles: 'test-results/junit-report.xml'
         testRunTitle: 'Playwright Test Results'
-
-    - task: PublishHtmlReport@1
-      displayName: 'Publish HTML report'
-      condition: succeededOrFailed()
-      inputs:
-        reportDir: 'playwright-report'
-        tabName: 'Playwright Report'
+        failTaskOnFailedTests: true
 
     - task: PublishPipelineArtifact@1
       displayName: 'Publish test artifacts'
       condition: succeededOrFailed()
       inputs:
         targetPath: 'test-results'
-        artifact: 'test-results'
+        artifact: 'playwright-test-results'
         publishLocation: 'pipeline'
 
     - task: PublishPipelineArtifact@1
-      displayName: 'Publish HTML report artifacts'
+      displayName: 'Publish HTML report'
       condition: succeededOrFailed()
       inputs:
         targetPath: 'playwright-report'
-        artifact: 'playwright-report'
+        artifact: 'playwright-html-report'
         publishLocation: 'pipeline'
