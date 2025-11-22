@@ -11,11 +11,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI ? [
-    ['html'],
-    ['junit', { outputFile: 'test-results/junit-report.xml' }],
-    ['json', { outputFile: 'test-results/test-results.json' }]
-  ] : 'html',
+  reporter: 'html',
   
   use: {
     baseURL: 'https://opensource-demo.orangehrmlive.com',

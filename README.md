@@ -1,37 +1,25 @@
-# OrangeHRM Test Automation Framework
+
+# Playwright TypeScript Test Automation Template
 
 ## Project Overview
 
-This project was created for **Safeguard Global** as part of the interview process. It demonstrates automated testing capabilities using modern test automation practices and tools.
+This repository is a template for future Playwright projects using TypeScript. It provides a ready-to-use structure, configuration, and sample tests for rapid setup and best practices in test automation.
 
-## Requirements Fulfilled
+## Application Under Test
 
-**Requirement:** Develop a test framework and implement tests for [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com)
+The template includes example tests for [OrangeHRM Demo](https://opensource-demo.orangehrmlive.com).
 
-**Instructions:**
-1. **Module Selection:** Tests implemented for the **Recruitment module** with two tabs: **Candidates** and **Vacances**
-2. **Authentication:** Uses login details from the OrangeHRM demo site (Admin/admin123)
-3. **Technology Selection** Playwright with Typescript
+- **Login Credentials:** Admin / admin123
 
-## Test Coverage
 
-### The Candidates Tab (6 Tests)
-- Page load and UI element verification
-- Add new candidate functionality (happy path)
-- Candidate search functionality
-- Job title filter functionality
-- Candidate status filter functionality
-- Required field validation
+## Example Test Coverage
 
-### The Vacancies Tab (6 Tests)
-- Page load and UI element verification
-- Add new vacancy functionality (happy path) 
-- Vacancy search and filter functionality
-- Vacancy status filter functionality
-- Hiring manager filter functionality
-- Required field validation
+Sample tests are provided for the OrangeHRM Recruitment module:
 
-**Total:** 12 automated tests covering core recruitment workflows
+- Candidates Tab: UI verification, add candidate, search, filters, validation
+- Vacancies Tab: UI verification, add vacancy, search, filters, validation
+
+Total: 12 automated tests covering core recruitment workflows
 
 ## Technology Stack
 
@@ -109,10 +97,3 @@ The framework is configured with:
 - **Screenshots:** On failure only
 - **Videos:** On failure only
 - **Traces:** On first retry
-
-## Test Data
-
-The framework uses:
-- **Login Credentials:** Admin / admin123 (as provided on OrangeHRM demo site)
-- **Dynamic Test Data:** Generated with timestamps to avoid conflicts
-- **Search Test Data:** Predefined candidate names for search functionality
